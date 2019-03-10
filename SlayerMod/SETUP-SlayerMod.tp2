@@ -1,0 +1,171 @@
+BACKUP ~SlayerMod/Backup~ // So WeiDU can uninstall
+AUTHOR ~Ulb (thisisulb@gmail.com)~
+//README ~SlayerMod/readme.pdf~ // Shows readme file
+
+ALWAYS
+INCLUDE ~SlayerMod/lib/functions.tph~   // Borrowed from Argent77 for dynamic animtion slot search code
+END
+  
+//LANGUAGE ~English~  ~English~ ~SlayerMod/translations/english/UB-S.tra~
+
+BEGIN ~SlayerMod~ 
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet~) ~This mod is only for BGEE, SOD, BG2EE, EET~
+
+//Bat Loa Animation
+COPY ~SlayerMod/BatLoaSounds~ ~override~
+
+//fly
+COPY ~SlayerMod/BatLoaFly~ ~override~
+COPY ~SlayerMod/BatLoaFly/UBB7FSc.bam~ ~override/UBB7FSd.bam~
+COPY ~SlayerMod/BatLoaFly/UBB7FSce.bam~ ~override/UBB7FSde.bam~
+COPY ~SlayerMod/BatLoaFly/UBB7FSc.bam~ ~override/UBB7FSp.bam~
+COPY ~SlayerMod/BatLoaFly/UBB7FSce.bam~ ~override/UBB7FSpe.bam~
+COPY ~SlayerMod/BatLoaFly/UBB7FSc.bam~ ~override/UBB7Fca.bam~
+COPY ~SlayerMod/BatLoaFly/UBB7FSce.bam~ ~override/UBB7Fcae.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7WINV.bam~ ~override/UBB7FINV.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7WSl.bam~ ~override/UBB7fSl.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7WSle.bam~ ~override/UBB7fSle.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7WTW.bam~ ~override/UBB7FTW.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7WTWe.bam~ ~override/UBB7FTWe.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7Wde.bam~ ~override/UBB7Fde.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7Wdee.bam~ ~override/UBB7Fdee.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7Wgu.bam~ ~override/UBB7fgu.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7Wgue.bam~ ~override/UBB7fgue.bam~
+
+// walk
+COPY ~SlayerMod/BatLoaWalk~ ~override~
+COPY ~SlayerMod/BatLoaWalk/UBB7WSc.bam~ ~override/UBB7WSd.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7WSce.bam~ ~override/UBB7WSde.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7WA1.bam~ ~override/UBB7WA2.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7WA1.bam~ ~override/UBB7WA3.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7WA1.bam~ ~override/UBB7WA4.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7WA1.bam~ ~override/UBB7WSP.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7WA1e.bam~ ~override/UBB7WA2e.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7WA1e.bam~ ~override/UBB7WA3e.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7WA1e.bam~ ~override/UBB7WA4e.bam~
+COPY ~SlayerMod/BatLoaWalk/UBB7WA1e.bam~ ~override/UBB7WSPe.bam~
+
+  ///////////////////////////////
+  // Install Animations        //
+  ///////////////////////////////
+ 
+  
+  // WALK
+  LAF FIND_FREE_ANIM_SLOT INT_VAR slotMin = 0xe000 slotMax = 0xefff RET slot END
+  ACTION_IF (slot <= 0) BEGIN
+    FAIL ~No free creature animation slot found.~
+  END
+  LAF TO_HEX_NUMBER INT_VAR value = slot minDigits = 4 RET hexNumber END
+  APPEND ~animate.ids~ ~0x%hexNumber% BAT_LOA_WALK7~ UNLESS ~BAT_LOA_WALK7~
+  CLEAR_IDS_MAP
+  COPY ~SlayerMod/files/exxW.ini~ ~override/%hexNumber%.ini~
+  
+  // FLY
+  LAF FIND_FREE_ANIM_SLOT INT_VAR slotMin = 0xe000 slotMax = 0xefff RET slot END
+  ACTION_IF (slot <= 0) BEGIN
+    FAIL ~No free creature animation slot found.~
+  END
+  LAF TO_HEX_NUMBER INT_VAR value = slot minDigits = 4 RET hexNumber END
+  APPEND ~animate.ids~ ~0x%hexNumber% BAT_LOA_FLY7~ UNLESS ~BAT_LOA_FLY7~
+  CLEAR_IDS_MAP
+  COPY ~SlayerMod/files/exxF.ini~ ~override/%hexNumber%.ini~
+  
+
+  
+ 
+
+  ///////////////////////////////
+  //       Copy Stuff Over     //
+  ///////////////////////////////
+  
+  //compile
+  COMPILE ~SlayerMod/files/UB-SLYK.BAF~
+  COMPILE ~SlayerMod/files/UB-SLYR.BAF~
+  
+  // Bluk Copy
+	COPY ~SlayerMod/files/copy~ ~override~  
+  
+  
+    COPY ~SlayerMod/files/SPIN822.SPL~ ~override~
+	SAY NAME1 ~Slayer Change~
+	SAY UNIDENTIFIED_DESC ~Slayer Change
+
+When you use this ability, you take on the form of the brutal essence of Bhaal: a violent, powerful creature made of pure death. Embracing the Slayer means constantly feeding the Slayer's hunger for life.
+Changing into the Avatar of Murder carries the taint of Evil and as a result, every time you use the Slayer, you lose 2 reputation.
+
+The Slayer form grants the following traits:
+
+  Lose 10 hit points per second.
+  Gain special abilities usable at will:
+  - Screech: Release a terrible screech, deafening anyone within a hearing range while granting the Slayer blindsight, invisibility detection and a perception bonus of +4 Thac0 for five rounds.
+  - Take flight/land: Take flight, gaining a massive movement speed bonus but become unable to attack or screech.
+
+– Maxmimum Hit Points are doubled
+– Saving Throws +2 bonus
+- Magic Resistance: +30%
+- Physical Resistance: +30%
+– Attacks per round inceased by 1 (up to a total of 5 attacks per round)
+- Thac0 increased by +4 (touch attack bonus)
+- Claws are considered to be of +5 enchantment when determining what they can hit and deal 2d10 slashing damage, healing the Slayer for any damage done to living targets.
+– Immunity to imprisonment, level drain, stun, slow~ // % ~unidentified description for items, spell description for spells
+
+	COPY_EXISTING ~SPIN822.SPL~ ~override/SPIN823~
+
+
+    COPY ~SlayerMod/files/SPIN718.SPL~ ~override~
+	SAY NAME1 ~End Slayer Change~
+	SAY UNIDENTIFIED_DESC ~End Slayer Change~ // unidentified description for items, spell description for spells
+	
+COPY_EXISTING ~UB-SLYL.SPL~ ~override~
+	SAY NAME1 ~Stop Flying~
+	SAY UNIDENTIFIED_DESC ~Stop Flying~
+
+COPY_EXISTING ~UB-SLYF.SPL~ ~override~
+	SAY NAME1 ~Take Flight~
+	SAY UNIDENTIFIED_DESC ~Take Flight~
+	
+COPY_EXISTING ~UB-SCRE.SPL~ ~override~
+	SAY NAME1 ~Screech~
+	SAY UNIDENTIFIED_DESC ~Release a terrible screech, deafening anyone within a hearing range while granting the Slayer blindsight, invisibility detection and a perception bonus of +4 Thac0 for five rounds.~
+
+
+  ///////////////////////////
+  // Patch animation      ///
+  ///////////////////////////
+/*  
+	CLEAR_IDS_MAP
+	COPY_EXISTING ~UB-SWK.cre~ ~override~
+	WRITE_LONG 0x28 (IDS_OF_SYMBOL (~animate~ ~BAT_LOA_WALK7~))
+	SAY NAME1 ~Slayer~
+	SAY NAME2 ~Slayer~
+	
+    COPY_EXISTING ~UB-SFY.cre~ ~override~
+	WRITE_LONG 0x28 (IDS_OF_SYMBOL (~animate~ ~BAT_LOA_FLY7~))
+	SAY NAME1 ~Slayer~
+	SAY NAME2 ~Slayer~
+*/
+  ///////////////////////////////////////
+  // Patch weapons to change animation///
+  ///////////////////////////////////////
+
+COPY_EXISTING ~UB-SWK.itm~ ~override~  // walk weapon
+  SAY NAME1 ~Attack~ // unidentified name for items OR spell name
+  SAY NAME2 ~Attack~ // unidentified name for items OR spell name
+	LPF ALTER_EFFECT
+    INT_VAR
+      check_globals = 1
+      check_headers = 1
+      match_opcode = 53 // Animation Change
+      parameter1 = (IDS_OF_SYMBOL (~animate~ ~BAT_LOA_WALK7~))  // bat loa walk
+	END
+	
+COPY_EXISTING ~UB-SFY.itm~ ~override~  // fly weapon
+  SAY NAME1 ~Attack~ // unidentified name for items OR spell name
+  SAY NAME2 ~Attack~ // unidentified name for items OR spell name
+	LPF ALTER_EFFECT
+    INT_VAR
+      check_globals = 1
+      check_headers = 1
+      match_opcode = 53 // Animation Change
+      parameter1 = (IDS_OF_SYMBOL (~animate~ ~BAT_LOA_FLY7~))  // bat loa fly
+	END

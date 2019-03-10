@@ -1,0 +1,7 @@
+IF
+	True()
+THEN
+	RESPONSE #100
+		Kill(Player1)
+		Wait(5)
+END

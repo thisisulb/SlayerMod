@@ -1,0 +1,11 @@
+SPIN783.SPL (Slayer Change) - Slayer Change from AR1514.BCS (Asylum Basement, BODHI encounter)
+	SLAYERW2.ITM (Attack) - Slayer Weapon from SPIN783.SPL
+		SLAYER.CRE (Slayer) - Polymorph Creature for SLAYERW2.ITM
+SPIN852.SPL (Slayer Change) -  Slayer Change After Rest
+	SLAYERW4.ITM (Attack) - Slayer Weapon from SPIN852.SPL
+		
+		
+SPIN823.SPL (Slayer Change Two) player initiated slayer change
+	SLAYERW3.ITM (Attack) - Slayer Weapon from SPIN823.SPL
+	--> move dmg and berserk effects to weapon and turn into periodic effects
+	slayer3.eff + sly3.spl for periodic effects
