@@ -134,7 +134,7 @@ COPY_EXISTING ~UB-SCRE.SPL~ ~override~
   ///////////////////////////
 /*  
 	CLEAR_IDS_MAP
-	COPY_EXISTING ~UB-SWK.cre~ ~override~
+	COPY_EXISTING ~SLAYERW2.ITM~ ~override~
 	WRITE_LONG 0x28 (IDS_OF_SYMBOL (~animate~ ~BAT_LOA_WALK7~))
 	SAY NAME1 ~Slayer~
 	SAY NAME2 ~Slayer~
@@ -149,6 +149,17 @@ COPY_EXISTING ~UB-SCRE.SPL~ ~override~
   ///////////////////////////////////////
 
 COPY_EXISTING ~UB-SWK.itm~ ~override~  // walk weapon
+  SAY NAME1 ~Attack~ // unidentified name for items OR spell name
+  SAY NAME2 ~Attack~ // unidentified name for items OR spell name
+	LPF ALTER_EFFECT
+    INT_VAR
+      check_globals = 1
+      check_headers = 1
+      match_opcode = 53 // Animation Change
+      parameter1 = (IDS_OF_SYMBOL (~animate~ ~BAT_LOA_WALK7~))  // bat loa walk
+	END
+	
+COPY_EXISTING ~SLAYERW2.itm~ ~override~  // walk weapon
   SAY NAME1 ~Attack~ // unidentified name for items OR spell name
   SAY NAME2 ~Attack~ // unidentified name for items OR spell name
 	LPF ALTER_EFFECT
